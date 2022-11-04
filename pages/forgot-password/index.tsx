@@ -1,6 +1,12 @@
 import styled from '@emotion/styled';
-import { ArrowBack } from '@mui/icons-material';
-import { Button, FormControl, TextField, Typography } from '@mui/material';
+import { ArrowBack, Mail } from '@mui/icons-material';
+import {
+  Button,
+  FormControl,
+  InputAdornment,
+  TextField,
+  Typography
+} from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import Link from 'next/link';
 import { useForm, SubmitHandler } from 'react-hook-form';
@@ -110,6 +116,13 @@ const ForgotPassword = () => {
             <Input>
               <FormControl fullWidth>
                 <TextField
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <Mail />
+                      </InputAdornment>
+                    )
+                  }}
                   {...register('email')}
                   error={!!errors.email}
                   helperText={errors.email?.message}

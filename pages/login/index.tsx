@@ -1,5 +1,11 @@
 import styled from '@emotion/styled';
-import { Button, FormControl, TextField, Typography } from '@mui/material';
+import {
+  Button,
+  FormControl,
+  InputAdornment,
+  TextField,
+  Typography
+} from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import Link from 'next/link';
 import { useForm, SubmitHandler } from 'react-hook-form';
@@ -7,6 +13,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
 import Title from '../../components/Title';
+import { Key, Person } from '@mui/icons-material';
 
 const Wrapper = styled.div`
   width: 100vw;
@@ -108,6 +115,13 @@ const Login = () => {
             <Input>
               <FormControl fullWidth>
                 <TextField
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <Person />
+                      </InputAdornment>
+                    )
+                  }}
                   {...register('email')}
                   error={!!errors.email}
                   helperText={errors.email?.message}
@@ -118,6 +132,13 @@ const Login = () => {
             <Input>
               <FormControl fullWidth>
                 <TextField
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <Key />
+                      </InputAdornment>
+                    )
+                  }}
                   {...register('password')}
                   type={'password'}
                   error={!!errors.password}

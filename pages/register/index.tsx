@@ -1,6 +1,12 @@
 import styled from '@emotion/styled';
-import { ArrowBack } from '@mui/icons-material';
-import { Button, FormControl, TextField, Typography } from '@mui/material';
+import { ArrowBack, Key, Person } from '@mui/icons-material';
+import {
+  Button,
+  FormControl,
+  InputAdornment,
+  TextField,
+  Typography
+} from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import Link from 'next/link';
 import { useForm, SubmitHandler } from 'react-hook-form';
@@ -114,16 +120,30 @@ const Register = () => {
             <Input>
               <FormControl fullWidth>
                 <TextField
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <Person />
+                      </InputAdornment>
+                    )
+                  }}
                   {...register('email')}
                   error={!!errors.email}
                   helperText={errors.email?.message}
-                  placeholder="email"
+                  placeholder="your_email@gmail.com"
                 />
               </FormControl>
             </Input>
             <Input>
               <FormControl fullWidth>
                 <TextField
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <Key />
+                      </InputAdornment>
+                    )
+                  }}
                   {...register('password')}
                   type={'password'}
                   error={!!errors.password}
@@ -135,6 +155,13 @@ const Register = () => {
             <Input>
               <FormControl fullWidth>
                 <TextField
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <Key />
+                      </InputAdornment>
+                    )
+                  }}
                   {...register('confirmPwd')}
                   error={!!errors.confirmPwd}
                   helperText={errors.confirmPwd?.message}
