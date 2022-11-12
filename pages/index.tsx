@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import Layout from '../components/layout';
 import Post from '../components/post';
+import Share from '../components/share';
 import Title from '../components/Title';
 
 const Wrapper = styled.div`
@@ -9,6 +10,7 @@ const Wrapper = styled.div`
   overflow-x: hidden;
 `;
 const Container = styled.div`
+  gap: 15px;
   box-sizing: border-box;
   padding: 20px 0;
   width: 100%;
@@ -25,6 +27,7 @@ export default function Home() {
       <Title title="Social" />
       <Wrapper>
         <Container>
+          <Share />
           <Post />
           <Post />
           <Post />

@@ -5,7 +5,7 @@ import SideBar from '../sidebar';
 import RightBar from '../rightbar';
 
 const Wrapper = styled.div`
-  width: 100vw;
+  width: 100%;
   min-height: 100vh;
   position: relative;
   display: flex;
