@@ -29,18 +29,31 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
 `;
-const Content = styled.div`
+const Left = styled.div`
+  width: 50%;
+  height: 100vh;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
 `;
-const Logo = styled.div`
+const Right = styled.div`
+  width: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 15px 0px;
 `;
-const Branch = styled(Typography)`
-  box-shadow: 0 19px 73px 0 rgb(0 0 0 / 17%);
+const Background = styled.div`
+  width: 100%;
+  background-image: url('https://images.pexels.com/photos/4881619/pexels-photo-4881619.jpeg?auto=compress&cs=tinysrgb&w=1600');
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+`;
+const Content = styled.div`
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
 `;
 const Form = styled.form`
   min-width: 470px;
@@ -102,80 +115,80 @@ const Login = () => {
     <Wrapper>
       <Title title={'Social-login'} />
       <Container>
-        <Content>
-          <Logo>
-            <Branch fontFamily={'monospace'} color={'whitesmoke'} variant="h3">
-              Hao Social
-            </Branch>
-          </Logo>
-          <Form onSubmit={handleSubmit(onSubmit)}>
-            <Typography marginBottom={5} variant="h3" fontSize={24}>
-              Sign In Your Account
-            </Typography>
-            <Input>
-              <FormControl fullWidth>
-                <TextField
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <Person />
-                      </InputAdornment>
-                    )
-                  }}
-                  {...register('email')}
-                  error={!!errors.email}
-                  helperText={errors.email?.message}
-                  placeholder="email"
-                />
-              </FormControl>
-            </Input>
-            <Input>
-              <FormControl fullWidth>
-                <TextField
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <Key />
-                      </InputAdornment>
-                    )
-                  }}
-                  {...register('password')}
-                  type={'password'}
-                  error={!!errors.password}
-                  helperText={errors.password?.message}
-                  placeholder="password"
-                />
-              </FormControl>
-            </Input>
-            <Input>
-              <Link href={'/forgot-password'}>
-                <Typography variant="subtitle1" color={'darkcyan'}>
-                  Forgot password?
-                </Typography>
-              </Link>
-            </Input>
-            <Input>
-              <LoginBtn disabled={!isValid} type="submit">
-                <Typography
-                  color={'whitesmoke'}
-                  fontWeight={600}
-                  variant="button">
-                  Login
-                </Typography>
-              </LoginBtn>
-              <Link href={'/register'}>
-                <Register>
+        <Left>
+          <Background></Background>
+        </Left>
+        <Right>
+          <Content>
+            <Form onSubmit={handleSubmit(onSubmit)}>
+              <Typography marginBottom={5} variant="h3" fontSize={24}>
+                Sign In Your Account
+              </Typography>
+              <Input>
+                <FormControl fullWidth>
+                  <TextField
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <Person />
+                        </InputAdornment>
+                      )
+                    }}
+                    {...register('email')}
+                    error={!!errors.email}
+                    helperText={errors.email?.message}
+                    placeholder="email"
+                  />
+                </FormControl>
+              </Input>
+              <Input>
+                <FormControl fullWidth>
+                  <TextField
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <Key />
+                        </InputAdornment>
+                      )
+                    }}
+                    {...register('password')}
+                    type={'password'}
+                    error={!!errors.password}
+                    helperText={errors.password?.message}
+                    placeholder="password"
+                  />
+                </FormControl>
+              </Input>
+              <Input>
+                <Link href={'/forgot-password'}>
+                  <Typography variant="subtitle1" color={'darkcyan'}>
+                    Forgot password?
+                  </Typography>
+                </Link>
+              </Input>
+              <Input>
+                <LoginBtn disabled={!isValid} type="submit">
                   <Typography
                     color={'whitesmoke'}
                     fontWeight={600}
                     variant="button">
-                    Register
+                    Login
                   </Typography>
-                </Register>
-              </Link>
-            </Input>
-          </Form>
-        </Content>
+                </LoginBtn>
+                <Link href={'/register'}>
+                  <Register>
+                    <Typography
+                      color={'whitesmoke'}
+                      fontWeight={600}
+                      variant="button">
+                      Register
+                    </Typography>
+                  </Register>
+                </Link>
+              </Input>
+            </Form>
+          </Content>
+        </Right>
       </Container>
     </Wrapper>
   );

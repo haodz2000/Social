@@ -28,18 +28,30 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
 `;
-const Content = styled.div`
+const Left = styled.div`
+  width: 50%;
+  height: 100vh;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
 `;
-const Logo = styled.div`
+const Right = styled.div`
+  width: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 15px 0px;
 `;
-const Branch = styled(Typography)`
-  box-shadow: 0 19px 73px 0 rgb(0 0 0 / 17%);
+const Background = styled.div`
+  width: 100%;
+  background-image: url('https://images.pexels.com/photos/4881619/pexels-photo-4881619.jpeg?auto=compress&cs=tinysrgb&w=1600');
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+`;
+const Content = styled.div`
+  display: flex;
+  flex-direction: column;
 `;
 const Form = styled.form`
   min-width: 470px;
@@ -99,59 +111,59 @@ const ForgotPassword = () => {
     <Wrapper>
       <Title title={'Social-forgot-password'} />
       <Container>
-        <Content>
-          <Logo>
-            <Branch fontFamily={'monospace'} color={'whitesmoke'} variant="h3">
-              Hao Social
-            </Branch>
-          </Logo>
-          <Form onSubmit={handleSubmit(onSubmit)}>
-            <Typography
-              align="center"
-              marginBottom={5}
-              variant="h3"
-              fontSize={24}>
-              Forgot password
-            </Typography>
-            <Input>
-              <FormControl fullWidth>
-                <TextField
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <Mail />
-                      </InputAdornment>
-                    )
-                  }}
-                  {...register('email')}
-                  error={!!errors.email}
-                  helperText={errors.email?.message}
-                  placeholder="your_email@gmail.com"
-                />
-              </FormControl>
-            </Input>
-            <Input>
-              <SubmitBtn disabled={!isValid} type="submit">
-                <Typography
-                  color={'whitesmoke'}
-                  fontWeight={600}
-                  variant="button">
-                  Submit
-                </Typography>
-              </SubmitBtn>
-              <Link href={'/login'}>
-                <Login startIcon={<ArrowBack sx={{ color: 'white' }} />}>
+        <Left>
+          <Background></Background>
+        </Left>
+        <Right>
+          <Content>
+            <Form onSubmit={handleSubmit(onSubmit)}>
+              <Typography
+                align="center"
+                marginBottom={5}
+                variant="h3"
+                fontSize={24}>
+                Forgot password
+              </Typography>
+              <Input>
+                <FormControl fullWidth>
+                  <TextField
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <Mail />
+                        </InputAdornment>
+                      )
+                    }}
+                    {...register('email')}
+                    error={!!errors.email}
+                    helperText={errors.email?.message}
+                    placeholder="your_email@gmail.com"
+                  />
+                </FormControl>
+              </Input>
+              <Input>
+                <SubmitBtn disabled={!isValid} type="submit">
                   <Typography
                     color={'whitesmoke'}
                     fontWeight={600}
                     variant="button">
-                    Login
+                    Submit
                   </Typography>
-                </Login>
-              </Link>
-            </Input>
-          </Form>
-        </Content>
+                </SubmitBtn>
+                <Link href={'/login'}>
+                  <Login startIcon={<ArrowBack sx={{ color: 'white' }} />}>
+                    <Typography
+                      color={'whitesmoke'}
+                      fontWeight={600}
+                      variant="button">
+                      Login
+                    </Typography>
+                  </Login>
+                </Link>
+              </Input>
+            </Form>
+          </Content>
+        </Right>
       </Container>
     </Wrapper>
   );
