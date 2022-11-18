@@ -80,7 +80,7 @@ const Transition = React.forwardRef(function Transition(
   return <Slide direction="up" ref={ref} {...props} />;
 });
 const Share = () => {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState<boolean>(false);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -138,10 +138,9 @@ const Share = () => {
         open={open}
         TransitionComponent={Transition}
         keepMounted
-        onClose={handleClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description">
-        <Form />
+        <Form handleClose={handleClose} />
       </Dialog>
     </Wrapper>
   );

@@ -8,6 +8,8 @@ import {
 import { Button, ImageList, ImageListItem, Typography } from '@mui/material';
 import Image from 'next/image';
 import Divider from '../divider';
+import Comment from './comment';
+import Input from './input';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -89,6 +91,20 @@ const Action = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-bottom: 2px;
+`;
+const CommentBox = styled.div`
+  width: 100%;
+  padding: 5px 10px;
+  gap: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`;
+const ListComment = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 `;
 interface IMG {
   img: string;
@@ -245,6 +261,13 @@ const Post = () => {
           </BtnAction>
         </Action>
       </Body>
+      <Divider color="lightGray"></Divider>
+      <CommentBox>
+        <Input />
+        <ListComment>
+          <Comment />
+        </ListComment>
+      </CommentBox>
     </Wrapper>
   );
 };
