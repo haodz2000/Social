@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import Post from '../post';
+import { IUser } from '../../pages/profile/[id]';
 const Wrapper = styled.div`
   width: 100%;
   max-width: 1200px;
@@ -17,10 +18,10 @@ const Right = styled.div`
   display: flex;
   flex-direction: column;
 `;
-const Posts = () => {
+const Posts = ({ user }: { user: IUser }) => {
   return (
     <Wrapper>
-      <Left>Infomation</Left>
+      <Left>{JSON.stringify(user)}</Left>
       <Right>
         <Post />
         <Post />

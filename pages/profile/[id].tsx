@@ -8,7 +8,7 @@ import { Button, Typography } from '@mui/material';
 import { AddCircle, ModeEdit } from '@mui/icons-material';
 import Divider from '../../components/divider';
 import Posts from '../../components/profile/Posts';
-interface IUser {
+export interface IUser {
   id: string;
   name: string;
   coverPicture: string;
@@ -227,7 +227,7 @@ const Profile = ({ user }: { user: IUser }) => {
         </ContainerHeader>
       </Header>
       <Body>
-        <Posts />
+        <Posts user={user} />
       </Body>
     </HeaderLayout>
   );
