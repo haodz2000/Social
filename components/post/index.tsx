@@ -212,7 +212,7 @@ const Post = () => {
             sx={{ height: 450 }}
             variant="quilted"
             cols={4}
-            rowHeight={121}>
+            rowHeight={'auto'}>
             {itemData.map((item) => (
               <ImageListItem
                 key={item.img}

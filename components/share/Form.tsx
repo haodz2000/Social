@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
-import { Typography } from '@mui/material';
+import { ImageList, ImageListItem, Typography } from '@mui/material';
 import Divider from '../divider';
 import {
   AddAPhotoOutlined,
@@ -18,6 +18,7 @@ interface PropsOut {
 }
 interface Props {
   openFile?: boolean;
+  file?: boolean;
 }
 const Wrapper = styled.form`
   width: 100%;
@@ -98,8 +99,6 @@ const Text = styled.div`
 const BoxImage = styled.div`
   width: 100%;
   box-sizing: border-box;
-  min-height: 300px;
-  max-height: 500px;
   border-radius: 8px;
   border: 1px solid lightgray;
   margin-bottom: 10px;
@@ -113,7 +112,7 @@ const Select = styled.label`
 const AddImage = styled.div`
   width: 100%;
   height: 300px;
-  display: flex;
+  display: ${(props: Props) => (props.file ? 'none' : 'flex')};
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -152,8 +151,54 @@ const Label = styled.label`
   }
   cursor: pointer;
 `;
+interface FileCustom extends File {
+  preview: string;
+  rows: number;
+  cols: number;
+}
+
+function srcset(image: string, size: number, rows = 1, cols = 1) {
+  return {
+    src: `${image}`,
+    srcSet: `${image}?w=${size * cols}&h=${size * rows}`
+  };
+}
+
 const Form = ({ handleClose }: PropsOut) => {
   const [openFile, setOpenFile] = useState<boolean>(false);
+  const [file, setFile] = useState<FileCustom>();
+  const [listFile, setListFile] = useState<FileCustom[]>([]);
+  useEffect(() => {
+    if (file) {
+      file.preview = URL.createObjectURL(file);
+      setListFile((pre) => [...pre, file]);
+    }
+  }, [file]);
+  useEffect(() => {
+    if (listFile.length > 0) {
+      switch (listFile.length) {
+        case 1: {
+          listFile[0].rows = 3;
+          listFile[0].cols = 4;
+          break;
+        }
+        case 2: {
+          listFile[0].rows = 2;
+          listFile[0].rows = 4;
+          listFile[1].rows = 2;
+          listFile[1].rows = 4;
+          break;
+        }
+        default: {
+          break;
+        }
+      }
+      // for (let i = 0; i < listFile.length; i++) {
+      //   listFile[i].rows = i % 3;
+      //   listFile[i].cols = (i + 1) % 3;
+      // }
+    }
+  }, [listFile]);
   const handleToggleFile = () => {
     setOpenFile(!openFile);
   };
@@ -196,7 +241,7 @@ const Form = ({ handleClose }: PropsOut) => {
             {openFile && (
               <BoxImage>
                 <Select htmlFor="file">
-                  <AddImage>
+                  <AddImage file={listFile.length > 0}>
                     <Label htmlFor="file">
                       <AddAPhotoOutlined />
                     </Label>
@@ -208,7 +253,40 @@ const Form = ({ handleClose }: PropsOut) => {
                     </Typography>
                   </AddImage>
                 </Select>
-                <input id="file" type={'file'} hidden />
+                {file && (
+                  <ImageList
+                    sx={{ height: '300' }}
+                    variant="quilted"
+                    cols={4}
+                    rowHeight={'auto'}>
+                    {listFile.map((item) => (
+                      <ImageListItem
+                        key={item?.preview}
+                        cols={item.cols || 1}
+                        rows={item.rows || 1}>
+                        <Image
+                          loader={(item) => {
+                            return item.src;
+                          }}
+                          {...srcset(item.preview, 121, item.rows, item.cols)}
+                          alt={item.name}
+                          width={300}
+                          height={300}
+                          style={{ objectFit: 'cover' }}
+                          loading="eager"
+                        />
+                      </ImageListItem>
+                    ))}
+                  </ImageList>
+                )}
+                <input
+                  onChange={(e: any) => {
+                    setFile(e.target.files[0]);
+                  }}
+                  id="file"
+                  type={'file'}
+                  hidden
+                />
               </BoxImage>
             )}
             <Feature>
