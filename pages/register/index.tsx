@@ -1,6 +1,12 @@
 import styled from '@emotion/styled';
-import { ArrowBack } from '@mui/icons-material';
-import { Button, FormControl, TextField, Typography } from '@mui/material';
+import { ArrowBack, Key, Person } from '@mui/icons-material';
+import {
+  Button,
+  FormControl,
+  InputAdornment,
+  TextField,
+  Typography
+} from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import Link from 'next/link';
 import { useForm, SubmitHandler } from 'react-hook-form';
@@ -22,18 +28,30 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
 `;
-const Content = styled.div`
+const Left = styled.div`
+  width: 50%;
+  height: 100vh;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
 `;
-const Logo = styled.div`
+const Right = styled.div`
+  width: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 15px 0px;
 `;
-const Branch = styled(Typography)`
-  box-shadow: 0 19px 73px 0 rgb(0 0 0 / 17%);
+const Background = styled.div`
+  width: 100%;
+  background-image: url('https://images.pexels.com/photos/4881619/pexels-photo-4881619.jpeg?auto=compress&cs=tinysrgb&w=1600');
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+`;
+const Content = styled.div`
+  display: flex;
+  flex-direction: column;
 `;
 const Form = styled.form`
   min-width: 470px;
@@ -101,70 +119,91 @@ const Register = () => {
     <Wrapper>
       <Title title={'Social-register'} />
       <Container>
-        <Content>
-          <Logo>
-            <Branch fontFamily={'monospace'} color={'whitesmoke'} variant="h3">
-              Hao Social
-            </Branch>
-          </Logo>
-          <Form onSubmit={handleSubmit(onSubmit)}>
-            <Typography marginBottom={5} variant="h3" fontSize={24}>
-              Register New Account
-            </Typography>
-            <Input>
-              <FormControl fullWidth>
-                <TextField
-                  {...register('email')}
-                  error={!!errors.email}
-                  helperText={errors.email?.message}
-                  placeholder="email"
-                />
-              </FormControl>
-            </Input>
-            <Input>
-              <FormControl fullWidth>
-                <TextField
-                  {...register('password')}
-                  type={'password'}
-                  error={!!errors.password}
-                  helperText={errors.password?.message}
-                  placeholder="Password"
-                />
-              </FormControl>
-            </Input>
-            <Input>
-              <FormControl fullWidth>
-                <TextField
-                  {...register('confirmPwd')}
-                  error={!!errors.confirmPwd}
-                  helperText={errors.confirmPwd?.message}
-                  type={'password'}
-                  placeholder="Confirm password"
-                />
-              </FormControl>
-            </Input>
-            <Input>
-              <RegisterBtn disabled={!isValid} type="submit">
-                <Typography
-                  color={'whitesmoke'}
-                  fontWeight={600}
-                  variant="button">
-                  Register
-                </Typography>
-              </RegisterBtn>
-              <Link href={'/login'}>
-                <Login startIcon={<ArrowBack sx={{ color: 'white' }} />}>
+        <Left>
+          <Background></Background>
+        </Left>
+        <Right>
+          <Content>
+            <Form onSubmit={handleSubmit(onSubmit)}>
+              <Typography marginBottom={5} variant="h3" fontSize={24}>
+                Register New Account
+              </Typography>
+              <Input>
+                <FormControl fullWidth>
+                  <TextField
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <Person />
+                        </InputAdornment>
+                      )
+                    }}
+                    {...register('email')}
+                    error={!!errors.email}
+                    helperText={errors.email?.message}
+                    placeholder="your_email@gmail.com"
+                  />
+                </FormControl>
+              </Input>
+              <Input>
+                <FormControl fullWidth>
+                  <TextField
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <Key />
+                        </InputAdornment>
+                      )
+                    }}
+                    {...register('password')}
+                    type={'password'}
+                    error={!!errors.password}
+                    helperText={errors.password?.message}
+                    placeholder="Password"
+                  />
+                </FormControl>
+              </Input>
+              <Input>
+                <FormControl fullWidth>
+                  <TextField
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <Key />
+                        </InputAdornment>
+                      )
+                    }}
+                    {...register('confirmPwd')}
+                    error={!!errors.confirmPwd}
+                    helperText={errors.confirmPwd?.message}
+                    type={'password'}
+                    placeholder="Confirm password"
+                  />
+                </FormControl>
+              </Input>
+              <Input>
+                <RegisterBtn disabled={!isValid} type="submit">
                   <Typography
                     color={'whitesmoke'}
                     fontWeight={600}
                     variant="button">
-                    Login
+                    Register
                   </Typography>
-                </Login>
-              </Link>
-            </Input>
-          </Form>
-        </Content>
+                </RegisterBtn>
+                <Link href={'/login'}>
+                  <Login startIcon={<ArrowBack sx={{ color: 'white' }} />}>
+                    <Typography
+                      color={'whitesmoke'}
+                      fontWeight={600}
+                      variant="button">
+                      Login
+                    </Typography>
+                  </Login>
+                </Link>
+              </Input>
+            </Form>
+          </Content>
+        </Right>
       </Container>
     </Wrapper>
   );

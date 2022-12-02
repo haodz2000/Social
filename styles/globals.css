@@ -24,3 +24,7 @@ a {
     background: black;
   }
 }
+[contentEditable=true]:empty:before{
+  color: var(--secondary-text);
+  content:attr(placeholder)
+}
