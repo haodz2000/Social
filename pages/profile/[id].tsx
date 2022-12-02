@@ -8,7 +8,10 @@ import { Button, Typography } from '@mui/material';
 import { AddCircle, ModeEdit } from '@mui/icons-material';
 import Divider from '../../components/divider';
 import Posts from '../../components/profileComponent/Posts';
-import Introduce from '../../components/profileComponent/Introduce';
+import Friend from '../../components/profileComponent/Friend';
+import Images from '../../components/profileComponent/Images';
+import CoverPicture from '../../components/profileComponent/CoverPicture/CovePicture';
+import Groups from '../../components/profileComponent/Groups';
 export interface IUser {
   id: string;
   name: string;
@@ -106,15 +109,6 @@ const Right = styled.div`
   justify-content: flex-end;
   gap: 10px;
 `;
-const CoverPicture = styled.div`
-  width: 100%;
-  max-width: 1200px;
-  height: 500px;
-  background-color: #c5c5c5;
-  object-fit: contain;
-  border-radius: 8px;
-  margin: 0 auto 15px;
-`;
 const ButtonEdit = styled(Button)`
   height: 36px;
   background-color: #e4e6eb;
@@ -157,13 +151,13 @@ interface Params {
   id: string;
 }
 const Profile = ({ user }: { user: IUser }) => {
-  const [page,setPage] = useState<string>('posts')
+  const [page, setPage] = useState<string>('posts');
   return (
     <HeaderLayout>
       <Title title="Profile" />
       <Header>
         <ContainerHeader>
-          <CoverPicture></CoverPicture>
+          <CoverPicture />
           <FootHeader>
             <Left>
               <ImageAvatar
@@ -213,26 +207,34 @@ const Profile = ({ user }: { user: IUser }) => {
           </FootHeader>
           <Divider color="lightGray" />
           <Menu>
-            <MenuItem onClick={()=>setPage('posts')} active={page==='post'}>
-              <Typography fontWeight={700}>Posts</Typography>
+            <MenuItem
+              onClick={() => setPage('posts')}
+              active={page === 'posts'}>
+              <Typography fontWeight={700}>Bài viết</Typography>
             </MenuItem>
-            <MenuItem onClick={()=>setPage('introduce')} active={page ==='introduce'}>
-              <Typography fontWeight={700}>Introduce</Typography>
+            <MenuItem
+              onClick={() => setPage('friend')}
+              active={page === 'friend'}>
+              <Typography fontWeight={700}>Theo dõi</Typography>
             </MenuItem>
-            <MenuItem onClick={()=>setPage('friend')} active={page ==='friend'}>
-              <Typography fontWeight={700}>Friend</Typography>
+            <MenuItem
+              onClick={() => setPage('images')}
+              active={page === 'images'}>
+              <Typography fontWeight={700}>Ảnh</Typography>
             </MenuItem>
-            <MenuItem onClick={()=>setPage('images')} active={page ==='images'}>
-              <Typography fontWeight={700}>Images</Typography>
+            <MenuItem
+              onClick={() => setPage('groups')}
+              active={page === 'groups'}>
+              <Typography fontWeight={700}>Groups</Typography>
             </MenuItem>
           </Menu>
         </ContainerHeader>
       </Header>
       <Body>
-        {page=== 'posts'&&<Posts user={user} />}
-        {page=== 'introduce'&&<Introduce/>}
-        {page=== 'friend'&&<h1>Friend </h1>}
-        {page=== 'images'&&<h1>Images</h1>}
+        {page === 'posts' && <Posts user={user} />}
+        {page === 'friend' && <Friend user={user} />}
+        {page === 'images' && <Images user={user} />}
+        {page === 'groups' && <Groups user={user} />}
       </Body>
     </HeaderLayout>
   );

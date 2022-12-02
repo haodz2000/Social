@@ -24,16 +24,16 @@ const Right = styled.div`
   display: flex;
   flex-direction: column;
 `;
-interface Props{
+interface Props {
   user: IUser;
 }
-const Posts:React.FC<Props> = ({ user }) => {
+const Posts: React.FC<Props> = ({ user }) => {
   return (
     <Wrapper>
       <Left>
-        <Information user={user}/>
-        <ListImage/>
-        <ListFollowing/>
+        <Information user={user} />
+        <ListImage />
+        <ListFollowing />
       </Left>
       <Right>
         <Post />
